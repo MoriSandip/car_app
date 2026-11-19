@@ -1,5 +1,50 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# Car wash mobile app
+
+The app uses Redux Toolkit and RTK Query for API requests and keeps the signed-in
+role/token in AsyncStorage.
+
+## API connection
+
+Start the Car Wash backend on port `3000` before opening the app. The API base
+URL is configured in `app/config/api.ts`:
+
+- Android emulator: `http://10.0.2.2:3000/api/v1`
+- iOS simulator: `http://localhost:3000/api/v1`
+- Physical device: replace the host with the development computer's LAN IP
+  (for example, `http://192.168.1.20:3000/api/v1`) and keep both devices on the
+  same network. Use HTTPS for non-local deployments.
+
+## Role flows
+
+- **Customer:** register/sign in; dashboard; society registration and
+  verification tracking; flat registration/update/removal; car
+  registration/update/removal; month calendar and slot booking; booking
+  history, online payment and rescheduling; membership plan/offer discovery,
+  purchase and payment; and profile/sign out.
+- **Worker:** sign in with an administrator-created worker account; dashboard;
+  monthly schedule with date-grouped jobs, assigned-job search/status filters;
+  start, pause, resume, and complete actions; and profile/sign out.
+- Both roles can view their profile and sign out. An expired access token takes
+  the app back to sign in.
+
+These screens call the existing backend through Redux Toolkit Query. Requests
+include the current bearer token automatically. The mobile endpoints cover
+`/customers/login`, `/customers/register`, `/customers/me`, `/societies/my`,
+`/flats/my`, `/cars/my`, `/wash-services`, `/slots/availability`, `/bookings`,
+`/workers/login`, `/workers/me`, `/workers/dashboard`, and
+`/workers/assigned-bookings` (including work actions).
+
+Customers need a verified society before registering a flat, a verified flat
+before registering a car, and an active verified car plus available slots
+created by the administrator before submitting a booking. Customer
+verification and any server-side validation errors are shown in the app.
+
+Membership checkout uses the server's Stripe configuration and returns to the
+customer web app. After returning to the mobile app, refresh My Memberships or
+My Bookings to load the webhook-confirmed payment status.
+
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
@@ -95,3 +140,80 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+i dont want to hacked my system so please check below points
+- Hide all api keys - check .env file and setup
+- protect my admin route
+- add custom 404 page not found - worng route
+- unique title for every page
+- a meta description on every page
+-Internal links between pages
+-Sitemap, submitted in search console
+-robots.txt checked
+-share preview image
+-Alt text on every image
+-spam protection on forms
+-seneitze all form xss
+-TEST api with - 100000 users
+-Check for sql injection
+-Block cross site scripting
+-Add CSRF protection
+-Validate file uploads - max size 5 MB
+-Fix broken object-level authorization
+-Add rate limiting
+-All form validation - check all input validate
+-Secure JWT secretes + access token + refresh token
+-Turn off debug mode
+-Kepp API secretes server-side
+-Hash passwords securely
+-Add multi-factor authentication - two type - email / phone number - otp sent and verify - SKIP
+-Tighten CORS settings - SKIP
+-Remove auth tokens from local storage
+-Enforce  permissions server-side
+-Enable Row-level security
+-Verify webhooks signatures
+-Check fir SSRF
+-Remove exposed source maps
+-Change default credentials
+-Keep sensitive data out of logs
+-Update vulnerabke dependancies - SKIP
+
+-- check users access
+-- add sequrity headers
+-- removed unyused packaged
+-- check exposed files
+-- secure database
+-- caching
+-- load balancing
+-- server proxies
+-- API gate wayes
+-- CI/cd - skip
+-- Docker -- skip
+-- api timeouts - recalled api
+-- Event driven architecture
+-- distributed transaction
+-- dead letter queues
+-- Websockets
+-- long pollings
+-- server sent evnets
+-- database indexing
+-- query optimizations
+-- N+1 query
+-- connection pooling
+-- Read replicas
+--  Deadlock
+-- Garbaged collection
+-- Thread safty
+-- Autoscalling
+-- Horizontal and vertical sacalling
+-- CDN
+-- Edge caching
+-- cache invalidation
+-- matrics
+-- Alterts
+-- Error bugets
+-- JWt rotations
+Encriotion at rest
+encription in transit
+-- 
