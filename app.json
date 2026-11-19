@@ -1,4 +1,5 @@
 {
   "name": "CwApp",
-  "displayName": "CwApp"
+  "displayName": "CwApp",
+  "apiOrigin": ""
 }
